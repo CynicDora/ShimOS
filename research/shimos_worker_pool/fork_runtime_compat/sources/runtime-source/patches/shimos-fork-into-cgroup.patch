@@ -1,0 +1,116 @@
+--- a/posix/fork.c
++++ b/posix/fork.c
+@@ -36,8 +36,12 @@
+       _IO_lock_init (*((_IO_lock_t *) _IO_iter_file(i)->_lock));
+ }
+ 
+-pid_t
+-__libc_fork (void)
++/* Research-only Linux extension.  A source-level integration preserves the
++   native fork wrapper.  No external caller accesses glibc private symbols. */
++extern pid_t __shimos_Fork_into_cgroup (int, int *) attribute_hidden;
++
++static pid_t
++shimos_libc_fork_common (bool into_cgroup, int cgfd, int *pidfd)
+ {
+   /* Determine if we are running multiple threads.  We skip some fork
+      handlers in the single-thread case, to make fork safer to use in
+@@ -70,7 +74,8 @@
+       call_function_static_weak (__malloc_fork_lock_parent);
+     }
+ 
+-  pid_t pid = _Fork ();
++  pid_t pid = into_cgroup ? __shimos_Fork_into_cgroup (cgfd, pidfd)
++                          : _Fork ();
+ 
+   if (pid == 0)
+     {
+@@ -131,6 +136,18 @@
+ 
+   return pid;
+ }
++pid_t
++__libc_fork (void)
++{
++  return shimos_libc_fork_common (false, -1, NULL);
++}
++
++/* Nonstandard API, supported only by this pinned experimental libc build. */
++pid_t
++shimos_fork_into_cgroup (int cgfd, int *pidfd)
++{
++  return shimos_libc_fork_common (true, cgfd, pidfd);
++}
+ weak_alias (__libc_fork, __fork)
+ libc_hidden_def (__fork)
+ weak_alias (__libc_fork, fork)
+--- a/sysdeps/nptl/_Fork.c
++++ b/sysdeps/nptl/_Fork.c
+@@ -18,14 +18,37 @@
+ 
+ #include <arch-fork.h>
+ #include <pthreadP.h>
++#include <clone3.h>
++#include <stdint.h>
++
++#ifndef CLONE_INTO_CGROUP
++# define CLONE_INTO_CGROUP 0x200000000ULL
++#endif
+ 
+ /* Pointer to the fork generation counter in the thread library.  */
+ extern unsigned long int *__fork_generation_pointer attribute_hidden;
+ 
+-pid_t
+-_Fork (void)
++/* Same-stack fork semantics: no CLONE_VM, CLONE_THREAD or CLONE_SETTLS. */
++static pid_t
++shimos_arch_fork_cgroup (int cgfd, int *pidfd)
+ {
+-  pid_t pid = arch_fork (&THREAD_SELF->tid);
++  struct clone_args args = {
++    .flags = CLONE_CHILD_SETTID | CLONE_CHILD_CLEARTID
++             | CLONE_INTO_CGROUP | CLONE_PIDFD,
++    .child_tid = (uintptr_t) &THREAD_SELF->tid,
++    .pidfd = (uintptr_t) pidfd,
++    .exit_signal = SIGCHLD,
++    .cgroup = (unsigned int) cgfd
++  };
++  /* Fail closed: never silently fall back to fork or cgroup migration. */
++  return INLINE_SYSCALL_CALL (clone3, &args, sizeof (args));
++}
++
++static pid_t
++shimos_Fork_common (bool into_cgroup, int cgfd, int *pidfd)
++{
++  pid_t pid = into_cgroup ? shimos_arch_fork_cgroup (cgfd, pidfd)
++                          : arch_fork (&THREAD_SELF->tid);
+   if (pid == 0)
+     {
+       struct pthread *self = THREAD_SELF;
+@@ -49,4 +72,16 @@
+     }
+   return pid;
+ }
++pid_t
++_Fork (void)
++{
++  return shimos_Fork_common (false, -1, NULL);
++}
+ libc_hidden_def (_Fork)
++
++pid_t __shimos_Fork_into_cgroup (int, int *) attribute_hidden;
++pid_t
++__shimos_Fork_into_cgroup (int cgfd, int *pidfd)
++{
++  return shimos_Fork_common (true, cgfd, pidfd);
++}
+--- a/posix/Versions
++++ b/posix/Versions
+@@ -157,6 +157,7 @@
+     posix_spawn_file_actions_addclosefrom_np;
+   }
+   GLIBC_2.35 {
++    shimos_fork_into_cgroup;
+     posix_spawn_file_actions_addtcsetpgrp_np;
+   }
+   GLIBC_PRIVATE {

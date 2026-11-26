@@ -1,0 +1,12 @@
+name: Source and numeric evidence
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - run: python3 scripts/check_release.py
+      - run: python3 benchmarks/reproduce_tables.py
+      - run: python3 scripts/inspect_protocol.py

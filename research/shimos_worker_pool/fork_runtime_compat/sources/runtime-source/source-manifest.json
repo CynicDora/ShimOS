@@ -1,0 +1,203 @@
+{
+  "source_distribution": "Ubuntu glibc 2.35-0ubuntu3.15",
+  "upstream": "glibc 2.35",
+  "origin": "https://archive.ubuntu.com/ubuntu/pool/main/g/glibc/",
+  "signature_status": "dpkg-source reported unavailable public key; HTTPS origin + .dsc SHA256 matched, no claimed cryptographic signature verification",
+  "patches_applied": "all Ubuntu quilt patches via dpkg-source",
+  "files": {
+    "glibc_2.35-0ubuntu3.15.dsc": {
+      "sha256": "7b3e318ea5ac8b039a0fb5ef2e78b1812346bb753365d6d09622f698427cee56",
+      "size": 8888
+    },
+    "glibc_2.35.orig.tar.xz.asc": {
+      "sha256": "853aaaf17d7366817e814057a467625ee7c0b26240e8b878db0f33c389c7bcb6",
+      "size": 833
+    },
+    "glibc_2.35.orig.tar.xz": {
+      "sha256": "5123732f6b67ccd319305efd399971d58592122bcc2a6518a1bd2510dd0cf52e",
+      "size": 18165952
+    },
+    "glibc_2.35-0ubuntu3.15.debian.tar.xz": {
+      "sha256": "ea3f016b1987d995addb1c2b093a8f2679179d9bb3ebb9e2ea086469d56498c5",
+      "size": 962196
+    },
+    "patches/Versions.original": {
+      "sha256": "8ee9fd6331e51d74d35e2724f2b0b91b6bf277a7d612a26e98ece88c4ebbd282",
+      "size": 4022
+    },
+    "patches/_Fork.c.original": {
+      "sha256": "589389af357819b3c91ecc9cf61d55d65f5c969d38f041a7325c6242ee3006f2",
+      "size": 2040
+    },
+    "patches/fork.c.original": {
+      "sha256": "3bf424c2e85a4d47a0e9ed437bc47f8659d0c8503a29ae1a1dbe2083d866ce1b",
+      "size": 4282
+    },
+    "patches/shimos-fork-into-cgroup.patch": {
+      "sha256": "71901c8bea4702c2833493b41c7f979821575b62fd6f081366eaab285f6555da",
+      "size": 3129
+    },
+    "kernel/cgroup.c": {
+      "sha256": "6e855a8eea8e9528cc14cb7448fa3205b7381ee4b47cb6b63b974e11006b8dc2",
+      "size": 199893
+    },
+    "kernel/rseq.h": {
+      "sha256": "91c93e0e404e377a7e5203e9bd16b79e0c430236c5090e51eba95573dfb1b797",
+      "size": 3139
+    },
+    "kernel/fork.c": {
+      "sha256": "823875f2b2b92c23e2d7d0609350daf018edb091151dfcfd8938021d1b3feffb",
+      "size": 81698
+    },
+    "kernel/rseq.c": {
+      "sha256": "a9d14ac4e9385ddb699a1706f835763e0a79d0119b70681c9d85b22d4f31b5cc",
+      "size": 16169
+    },
+    "kernel/build.config": {
+      "sha256": "5f96f4a3e7e570e798789cac80313e62807e8545704e861852efdedb44ef78f5",
+      "size": 300533
+    },
+    "kernel/futex.h": {
+      "sha256": "d9310229c152f64f1b4ffe03a5dfeed5c9cea8f2693a1f28d7095cb177ff8b0f",
+      "size": 3577
+    },
+    "kernel/futex-core.c": {
+      "sha256": "bae42ed4934dbb0adcd9cb5c2044dadd2e9f2aecc4b32cea01f0bc94cdec6713",
+      "size": 55005
+    },
+    "python3.10_3.10.12-1~22.04.18.debian.tar.xz": {
+      "sha256": "e3d6ff53ff1417790cb269c24a6dca21155e3f86afb4fdf93d985e027119ea08",
+      "size": 298684
+    },
+    "python3.10_3.10.12-1~22.04.18.dsc": {
+      "sha256": "d6f8ee5af87969d28574322c20c991183b9d1cd8c581120aa235669583e16b31",
+      "size": 3715
+    },
+    "python3.10_3.10.12.orig.tar.xz": {
+      "sha256": "afb74bf19130e7a47d10312c8f5e784f24e0527981eab68e20546cfb865830b8",
+      "size": 19654836
+    },
+    "cpython-3.10.12-ubuntu/Modules/posixmodule.c": {
+      "sha256": "f2d8fcf4469daa34c7d5cb24aa5fc6e093ae427de8a697e0bd9f43c7113a18a0",
+      "size": 423384
+    },
+    "cpython-3.10.12-ubuntu/Python/ceval.c": {
+      "sha256": "bd2007a7d6b46d0ce49216a14dcc3c9cf365390121e8ed9aebfda34f2ec5f1bd",
+      "size": 211939
+    },
+    "cpython-3.10.12-ubuntu/Python/pystate.c": {
+      "sha256": "c8d272d6274e5bd1e2ad79df908f26cbb48c3c5b048bf0631d2bbe44cce2beb9",
+      "size": 57716
+    },
+    "cpython-3.10.12-ubuntu/Python/thread_pthread.h": {
+      "sha256": "dd0b65077e57da051c13248ceec97ee757f426b4818c8e8e89cef4aa72ca0683",
+      "size": 26424
+    },
+    "cpython-3.10.12-ubuntu/Lib/threading.py": {
+      "sha256": "a21926e636bec8c2e5579f3e79cce144c36379ef93c4596252af29970983553d",
+      "size": 57200
+    },
+    "glibc-2.35-ubuntu/posix/fork.c": {
+      "sha256": "f4ff38de839d2e744ee11a1b91fbd58a6b1b107490a3a87c94f856031e5a3546",
+      "size": 4914,
+      "patch_state": "ShimOS candidate D modified"
+    },
+    "glibc-2.35-ubuntu/posix/register-atfork.c": {
+      "sha256": "1d83325776358c804697d0a316e9668e9bf0f9cc9be136c0ec566d9b3b571abd",
+      "size": 4155,
+      "patch_state": "Ubuntu source after distribution patches"
+    },
+    "glibc-2.35-ubuntu/sysdeps/nptl/_Fork.c": {
+      "sha256": "3c4e9f9de1008be68e6454eb69ba5513688ff525f7ce2a23ee4a3fb086733853",
+      "size": 3088,
+      "patch_state": "ShimOS candidate D modified"
+    },
+    "glibc-2.35-ubuntu/sysdeps/nptl/fork.h": {
+      "sha256": "63569b8b5d6b4880f112ada1137abce81d7167591c38fdef6c35691ad8554fa5",
+      "size": 4523,
+      "patch_state": "Ubuntu source after distribution patches"
+    },
+    "glibc-2.35-ubuntu/sysdeps/unix/sysv/linux/arch-fork.h": {
+      "sha256": "acf9a2f59b08f3358c515fb81b2e1c5fed92cfeb9c2e4755d85cccce99355dc0",
+      "size": 2222,
+      "patch_state": "Ubuntu source after distribution patches"
+    },
+    "glibc-2.35-ubuntu/nptl/pthread_once.c": {
+      "sha256": "363caa8969397d245a91d19ed9a27b510eb577b5f7be9aafb0345812d16a1b7b",
+      "size": 6253,
+      "patch_state": "Ubuntu source after distribution patches"
+    },
+    "glibc-2.35-ubuntu/nptl/pthread_mutex_lock.c": {
+      "sha256": "c8f46ec1b81b4f262c72e397eb44e45c3661d051eb7373e082c11ad27690786e",
+      "size": 20116,
+      "patch_state": "Ubuntu source after distribution patches"
+    },
+    "glibc-2.35-ubuntu/nptl/pthread_kill.c": {
+      "sha256": "d4f4da3d3051c2697d65f560588141816d9d83af21baac1b975cd621e36d5111",
+      "size": 4149,
+      "patch_state": "Ubuntu source after distribution patches"
+    },
+    "glibc-2.35-ubuntu/malloc/arena.c": {
+      "sha256": "f9b1e1aadbbe97bfa0121148435f04c7020795fd5fd70fd7c4db97af9669101f",
+      "size": 31104,
+      "patch_state": "Ubuntu source after distribution patches"
+    },
+    "glibc-2.35-ubuntu/sysdeps/nptl/dl-tls_init_tp.c": {
+      "sha256": "80c6130a29b8d22eaeba5a3cdbb47a4a25d8968a821b3a50e0af2b9f63badc6b",
+      "size": 4384,
+      "patch_state": "Ubuntu source after distribution patches"
+    },
+    "patches/shimos_fork.h": {
+      "sha256": "bc3c83b42e3d4d8be1b30cd75c4c2b452de8809b94287c1a248637f487a04b5f",
+      "size": 585
+    },
+    "patches/apply-shimos.py": {
+      "sha256": "2e1ad2209c652ee910db66799d33663aea074e1c24514dd4f265607cb58f8bf8",
+      "size": 2987
+    },
+    "patches/bundle.py": {
+      "sha256": "f7aad07a7e0371c81068cc8b9c8e798e0540755b3a740b803c82ea198e906e67",
+      "size": 2524
+    }
+  },
+  "kernel": {
+    "source_tree": "/path/to/research-host/shimos-v2/linux/vanilla",
+    "commit": "1c732c6b94f0faee1526bd375add2fe10cba2e26",
+    "release": "6.18.49-agentic-runtime-opt-v1",
+    "critical_files_match_HEAD": {
+      "kernel/fork.c": {
+        "sha256": "823875f2b2b92c23e2d7d0609350daf018edb091151dfcfd8938021d1b3feffb",
+        "matches_commit": true
+      },
+      "kernel/cgroup/cgroup.c": {
+        "sha256": "6e855a8eea8e9528cc14cb7448fa3205b7381ee4b47cb6b63b974e11006b8dc2",
+        "matches_commit": true
+      },
+      "include/linux/rseq.h": {
+        "sha256": "91c93e0e404e377a7e5203e9bd16b79e0c430236c5090e51eba95573dfb1b797",
+        "matches_commit": true
+      },
+      "include/linux/futex.h": {
+        "sha256": "d9310229c152f64f1b4ffe03a5dfeed5c9cea8f2693a1f28d7095cb177ff8b0f",
+        "matches_commit": true
+      },
+      "kernel/rseq.c": {
+        "sha256": "a9d14ac4e9385ddb699a1706f835763e0a79d0119b70681c9d85b22d4f31b5cc",
+        "matches_commit": true
+      },
+      "kernel/futex/core.c": {
+        "sha256": "bae42ed4934dbb0adcd9cb5c2044dadd2e9f2aecc4b32cea01f0bc94cdec6713",
+        "matches_commit": true
+      }
+    }
+  },
+  "python": {
+    "source_distribution": "Ubuntu python3.10 3.10.12-1~22.04.18",
+    "origin": "https://archive.ubuntu.com/ubuntu/pool/main/p/python3.10/",
+    "host_dpkg_version": "3.10.12-1~22.04.18",
+    "guest_image_python_sha256": "a2f33a6e006989270f4340528eb61f8f97366e00a5d1b602ac8672ea44fc56ae",
+    "host_python_sha256": "a2f33a6e006989270f4340528eb61f8f97366e00a5d1b602ac8672ea44fc56ae",
+    "mapping_basis": "bytewise hash equality host-package ELF and guest image ELF; actual guest inventory supplies runtime version and ELF hash; not host version alone",
+    "signature_status": "source extraction used --no-check; downloaded archives match .dsc SHA256; no claimed signature verification"
+  }
+}

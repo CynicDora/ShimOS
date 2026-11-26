@@ -1,0 +1,87 @@
+{
+  "prefix": "qualification-ab-02",
+  "performance_benchmark": false,
+  "same_physical_host": true,
+  "sessions": [
+    {
+      "run": "qualification-ab-02-control",
+      "case": "control",
+      "status": "PASS",
+      "attempt_count": 3,
+      "lifecycle_checks": 185,
+      "runtime_checks": 233,
+      "runtime_snapshots": 28,
+      "robust_recoveries": 0
+    },
+    {
+      "run": "qualification-ab-02-budgets",
+      "case": "budgets",
+      "status": "PASS",
+      "attempt_count": 4,
+      "lifecycle_checks": 194,
+      "runtime_checks": 222,
+      "runtime_snapshots": 27,
+      "robust_recoveries": 0
+    },
+    {
+      "run": "qualification-ab-02-receipts",
+      "case": "receipts",
+      "status": "PASS",
+      "attempt_count": 4,
+      "lifecycle_checks": 212,
+      "runtime_checks": 312,
+      "runtime_snapshots": 37,
+      "robust_recoveries": 0
+    },
+    {
+      "run": "qualification-ab-02-cancels",
+      "case": "cancels",
+      "status": "PASS",
+      "attempt_count": 7,
+      "lifecycle_checks": 282,
+      "runtime_checks": 390,
+      "runtime_snapshots": 49,
+      "robust_recoveries": 0
+    },
+    {
+      "run": "qualification-ab-02-failures",
+      "case": "failures",
+      "status": "PASS",
+      "attempt_count": 6,
+      "lifecycle_checks": 309,
+      "runtime_checks": 374,
+      "runtime_snapshots": 47,
+      "robust_recoveries": 0
+    },
+    {
+      "run": "qualification-ab-02-controller-death",
+      "case": "controller_death",
+      "status": "PASS",
+      "attempt_count": 1,
+      "lifecycle_checks": 139,
+      "runtime_checks": 78,
+      "runtime_snapshots": 9,
+      "robust_recoveries": 0
+    },
+    {
+      "run": "qualification-ab-02-controller-during-entry",
+      "case": "controller_during_entry",
+      "status": "PASS",
+      "attempt_count": 1,
+      "lifecycle_checks": 131,
+      "runtime_checks": 42,
+      "runtime_snapshots": 5,
+      "robust_recoveries": 0
+    },
+    {
+      "run": "qualification-ab-02-runtime",
+      "case": "runtime",
+      "status": "PASS",
+      "attempt_count": 3,
+      "lifecycle_checks": 185,
+      "runtime_checks": 240,
+      "runtime_snapshots": 28,
+      "robust_recoveries": 3
+    }
+  ]
+}
