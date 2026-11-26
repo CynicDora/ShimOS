@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Validate source provenance, Python syntax and local Markdown links without importing guest code."""
-import ast,hashlib,json,re,sys
+import ast,hashlib,json,re,sys,subprocess
 from pathlib import Path
 R=Path(__file__).resolve().parents[1]
 errors=[];count=0
@@ -10,7 +10,12 @@ for p in R.rglob('*.py'):
     except SyntaxError as e:errors.append({'file':str(p.relative_to(R)),'syntax':str(e)})
     count+=1
 manifest=json.loads((R/'docs/source-manifest.json').read_text())
+tracked=None
+if (R/'.git').exists():
+    tracked=set(subprocess.check_output(['git','ls-files','-z'],cwd=R).decode().split('\0'))
 for row in manifest['entries']:
+    if tracked is not None and row['release'] not in tracked:
+        errors.append({'untracked_manifest_member':row['release']})
     p=R/row['release']
     if not p.is_file() or hashlib.sha256(p.read_bytes()).hexdigest()!=row['release_sha256']:
         errors.append({'provenance_mismatch':row['release']})

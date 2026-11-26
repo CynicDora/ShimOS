@@ -42,3 +42,9 @@ dist/
 **/.pytest_cache/
 .private/
 .DS_Store
+# Only the reviewed candidate identity metadata is distributable under runs/.
+!research/shimos_worker_pool/fork_runtime_compat/runs/
+research/shimos_worker_pool/fork_runtime_compat/runs/*
+!research/shimos_worker_pool/fork_runtime_compat/runs/candidate-04/
+research/shimos_worker_pool/fork_runtime_compat/runs/candidate-04/*
+!research/shimos_worker_pool/fork_runtime_compat/runs/candidate-04/candidate-runtime-sha.json

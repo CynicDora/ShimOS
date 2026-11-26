@@ -15,3 +15,5 @@ This source release was checked without launching a new VM or performance campai
 The original working tree has no Git history. This release initializes its own repository, uses a GitHub noreply author identity, and contains no inherited private commits. Before pushing, the committed history is scanned separately with gitleaks. Detailed machine-local packaging receipts are not included because they can contain host paths. This report describes packaging checks, not renewed experimental qualification or a comprehensive security audit.
 
 No blanket open-source license has been selected. The target publication mode is Private; permission to make it Public and to license first-party material remains with the owner.
+
+The first GitHub checkout exposed one packaging omission: a blanket `runs/` ignore excluded the reviewed candidate-runtime SHA metadata. A follow-up commit admits only that named JSON file, preserves the failed CI run, and adds a tracked-file check to prevent working-tree-only inputs from passing validation. No experimental results or raw runs were added/changed.
