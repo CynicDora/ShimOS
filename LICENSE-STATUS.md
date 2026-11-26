@@ -1,7 +1,7 @@
-# License status
+# 许可证状态
 
-No explicit license for the project's own research code was found in the reviewed source roots. **The project owner has not selected an open-source license for this distribution.** This file grants no license and is not an MIT, Apache, BSD or other open-source license.
+审查到的项目源码根目录中，没有明确指定项目自身的开源许可证。**作者尚未为本发布版选择许可证。**本文件不授予许可，也不能替代 MIT、Apache、BSD 等开源许可证。
 
-Keep the repository private unless the owner explicitly approves publication and resolves ownership/license questions. A private GitHub archive is not an open-source release. Do not infer permission to redistribute first-party code from the availability of research notes.
+仓库目前以 Private 研究归档保存。公开发布前，需要由作者确认代码权属和许可；不能因研究笔记可访问，就推定项目代码可以自由再分发。
 
-Third-party material keeps its own terms. The included zlib fixture carries its license in `zlib.h`; the glibc-derived patch is distributed with GNU license texts and source attribution. These terms do not assign a blanket license to ShimOS. See [third-party notices](THIRD_PARTY_NOTICES.md).
+第三方材料仍遵守各自条款：zlib 小型测试文件保留 `zlib.h` 中的许可，glibc 衍生补丁附 GNU 许可原文与来源。它们不构成 ShimOS 整个项目的统一许可证。详见[第三方说明](THIRD_PARTY_NOTICES.md)。

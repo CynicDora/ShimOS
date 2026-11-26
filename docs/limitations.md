@@ -1,32 +1,38 @@
-# Qualification and limitations
+# 当前能力与限制
 
-| Capability | Status | Scope |
+本项目已经完成多种原型和受控实验。这里把验证范围列清楚，便于判断哪些结果可以复用、哪些还需要新的研究。
+
+| 能力 | 当前进展 | 适用范围 |
 |---|---|---|
-| Persistent Bubblewrap domain | Implemented and tested | Frozen B-strict profile; same-domain Workers share trust/workspace |
-| NumPy/clangd Worker reuse | Implemented and measured | Fixed inputs and application protocols; no general daemon pool |
-| Z → S → W inheritance | Implemented and tested | Trusted single-threaded template, legal namespace hierarchy, private VM |
-| Lifecycle A + runtime B | 29 restricted attempts PASS | Eight VM sessions on one host; expected failure/UNKNOWN outcomes included |
-| NumPy CPU preload | Separately admitted | NumPy 2.2.6/OpenBLAS 0.3.29 fixed single-thread recipe and tested profiles |
-| G2/G3/G4, concurrency/pressure | Implemented research variants | Each has its own qualification and response/state contract |
-| Native Tool Exec | Implemented research variants | Separate tool policy, private receipts, limited tool/failure matrix |
-| One-fork direct cross-domain path | Permission diagnostics/review only | Alternative topology is not full original-contract qualification |
-| Automatic joint scheduler / general pool | Not implemented | Static experimental policies are not a scheduler |
-| Arbitrary dependency admission | Not implemented | Package-name equality and environment flags do not prove fork safety |
-| Transparent CLI classifier/converter | Concept/prior-art analysis only | No new transparent execution prototype or performance result |
-| General real-agent E2E speedup | Not established | Public trajectory analysis and fixed replay are separate from live E2E |
+| 持久 Bubblewrap 域 | 已实现、已测试 | 固定 B-strict 配置；同域任务共享信任与工作区 |
+| NumPy/clangd Worker 复用 | 已实现、已测量 | 固定输入和应用协议，不是通用进程池 |
+| Z → S → W 内存继承 | 已实现、已验证 | 可信单线程模板、合法权限层级、私有 VM |
+| 生命周期与运行时 A+B | 29 次受限资格通过 | 同宿主八个 VM 会话，包含预期失败及 UNKNOWN |
+| NumPy CPU 预加载 | 单独通过准入 | 固定 NumPy 2.2.6 / OpenBLAS 0.3.29 配方及受测 profiles |
+| G2/G3/G4 与资源竞争 | 已实现研究变体 | 各有自己的资格、结果返回和状态合同 |
+| Native Tool Exec | 已实现研究变体 | 固定工具与故障范围，私有退出回执 |
+| 跨域单次派生 | 权限诊断和架构审查 | 不等于原合同下完整集成已通过 |
+| 自动联合调度器 | 尚未实现 | 静态实验策略不能当成调度系统 |
+| 任意依赖安全预加载 | 尚未实现 | 包名相同、线程参数相同都不足以证明安全 |
+| 透明 CLI 分类与转换 | 概念和先例分析 | 没有新原型或对应性能数据 |
+| 真实 Agent 的普遍端到端加速 | 尚未证明 | 离线轨迹、固定回放与在线自主运行分别看待 |
 
-## Security and runtime
+## 安全与运行时
 
-Do not use this repository as a production untrusted multitenant service. Cross-domain construction retains sensitive namespace/FD authority. Unknown Python/native callbacks can run before the business gate. Threads, locks, signals, plugins, device state and DSO identity require runtime-specific review. The full glibc regression suite and arbitrary Python extension compatibility were not established.
+跨域构造需要敏感的 Namespace 权限和管理 FD。未知依赖的 Python/native 回调可能在业务授权前运行；线程、锁、信号、插件、设备状态与动态库身份都需要单独验证。当前没有任意扩展兼容保证，也未完成全量 glibc 回归。
 
-H survival, fixed fixtures and finite fault scenarios are explicit assumptions in the A+B and NumPy results. Host OOM/reboot, inaccessible filesystems, uninterruptible processes, long-lived state growth and all fault interleavings are not comprehensively covered. Later follow-up qualification has narrower named cases and is not a global guarantee.
+A+B 和 NumPy 的资格以固定环境、监督进程存活及有限故障集合为前提。宿主 OOM/重启、文件系统故障、不可中断进程、长期状态增长和全部竞态组合，没有得到全面覆盖。Tool Exec 后续增加的资格也不能反向覆盖每个旧版本。
 
-## Measurement
+这些原型不适合直接服务不可信多租户生产负载。
 
-Headline performance is from controlled work on the same physical host, not independent hardware or production distributions. VM boot/distribution preparation lies outside product session timing and is separately scoped in the reports. Initialization and final product release are included. Diagnostic probes, fingerprints and result validation have cost; historical cohorts with different instrumentation are not interchangeable.
+## 性能结论
 
-G4 permits persistent state with enumerated reset. Docker/B-strict agent adapters did not obtain a shared complete qualification contract, so no strict B0/B1 speedup is claimed. The observed count of Bash actions is not a count of safe heap/template reuse opportunities.
+主要重复来自同一物理宿主上的 VM，不是多种硬件或生产分布。首次应用预热和最终回收已计费；VM 启动、共同夹具分发等另有边界。诊断、指纹和结果验证本身也有成本，不能随意混用不同插桩批次。
 
-## Distribution
+G4 允许保留业务进程，并只恢复明确列出的状态。B0/B1 没有共同完整资格，也不能合成一个公平排行榜。工具动作数量不是可安全复用初始化状态的次数。
 
-Images, pinned runtime binaries, vendor source trees, third-party trajectories, private Feishu records, and raw logs were deliberately omitted. Historical source paths and dependency manifests are retained, but a source-only checkout cannot replay all experiments without reconstructing external assets. Sanitized reports label omitted links. No SPDX license has been invented for the project's own code; see [license status](../LICENSE-STATUS.md).
+## 仓库复现范围
+
+仓库收录精选源码、报告和数值导出，没有包含 VM 镜像、完整二进制运行时、第三方轨迹或私人日志。源码入口和依赖身份保留了下来，但重跑需要恢复外部资产并确认版本。
+
+项目自身许可证尚未确定，详见[许可证状态](../LICENSE-STATUS.md)。当前 Private 归档不等于已经完成公开开源发行。

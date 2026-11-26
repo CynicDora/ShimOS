@@ -1,11 +1,21 @@
-# Distribution selection and redaction
+# 仓库收录范围与脱敏说明
 
-The original research directory is unchanged and is not a Git repository. This release starts a new Git history; it does not pretend the research has historical Git commits.
+原研究目录保持不变，且没有 Git 历史。本发布版从独立目录建立新仓库，没有为过去的实验补造历史 commit。
 
-Included: selected project-authored prototype and runner source, licensed zlib fixture, glibc patch with notices, final reports, numeric result exports and safe offline inspection tools. The main reference is A+B; later experimental variants are indexed separately.
+## 收录了什么？
 
-Excluded by default: raw run logs/serial traces, VM images/disks/initramfs, generated binaries, dependency bundles/wheels, full Linux/glibc/CPython source trees, cloned Agent/related-work repositories, original benchmark workspaces, public/private trajectories, Feishu content and attachments, credentials, private service details, caches and unrelated newer architecture-discovery branches.
+项目原型和实验驱动的精选源码、带原许可的 zlib 小型测试文件、glibc 补丁与声明、最终报告、数值导出，以及离线检查工具。主要跨域参考是 A+B；后续研究变体分别列出，便于对应资格。
 
-Sanitized snapshots replace the original user's home prefix with `/path/to/research-host`, omit private Feishu URLs and private-network addresses, and mark links to omitted run artifacts. Numeric result values are not changed. Do not interpret sanitized paths as portable deployment configuration. `docs/source-manifest.json` records both original-file and released-file SHA256 values. Omitted raw evidence prevents complete independent requalification from this checkout alone.
+## 哪些没有上传？
 
-Reports are mostly in their original Chinese; the README and navigation documents are English. Historical reports retain dated scope and open issues; later results do not retroactively certify earlier paths.
+原始运行日志和串口追踪、VM 磁盘/镜像/initramfs、生成二进制、依赖 bundle/wheel、完整 Linux/glibc/CPython 源树、克隆的 Agent 与先例仓库、Benchmark 原始工作区和轨迹、飞书内容与附件、认证信息、内部服务细节、缓存，以及本次主题以外的架构分支。
+
+公开可访问不等于可以重新分发；许可或隐私不确定的内容默认省略。
+
+## 做了哪些文本处理？
+
+发布副本把原用户主目录前缀替换为 `/path/to/research-host`，省略私人文档链接与内部网络地址，并标注未分发的实验附件。没有修改数值结果，也不应把占位路径当作可直接部署的配置。
+
+`docs/source-manifest.json` 同时保存原始和发布文件的 SHA256。因为没有收录全部原始证据，这个仓库不能独立重新认证所有历史资格。
+
+README 和主要导读文档现为中文；历史报告、源码注释、原始字段与第三方许可保留各自语言。旧报告的“当前”“下一步”属于当时阶段，后来的结果不会反向认证早期路径。

@@ -1,25 +1,37 @@
-# Research history
+# 研究历程：四次想法如何逐步演变
 
-## 1. Bubblewrap: start from inexpensive isolation
+ShimOS 是一段持续用原型、实验和真实负载检查想法的探索。前面的机制确实取得过效果，后面的转向则来自对适用条件和已有工作的进一步认识。
 
-We investigated whether Linux isolation could be created, destroyed and organized more flexibly. Bubblewrap already supplied mature construction primitives, so we built prototypes and measured cost rather than designing another sandbox from scratch. Application initialization often cost more than domain creation, moving attention toward the programs inside.
+## 1. Bubblewrap：从轻量隔离寻找机会
 
-## 2. Worker Pool: preserve programs that are ready
+我们最初考虑：能否更快、更灵活地创建和回收隔离环境？轻量沙箱是否会带来不同于传统容器的执行方式？是否需要自己开发新的隔离机制？
 
-We built fixed NumPy and clangd workers inside persistent domains, compared fresh/reused execution, tested static shared/separate layouts and measured retained memory. Reuse helped on repeated controlled requests. Complete Workers consumed memory and carried application state; SAND and FaasCache also provided close precedents for organization and retention.
+调研和原型表明，Linux 与 Bubblewrap 已提供成熟的基础能力。测量中，程序准备又可能比建域更贵。因此，我们逐渐从“怎样建环境”，转向“环境里的程序能否少初始化几次”。
 
-The next question was whether only shared initialization could survive, independently of each application Worker and domain.
+## 2. Worker Pool：让准备好的程序继续工作
 
-## 3. Zygote: share initialized state across independent domains
+我们实现 NumPy、clangd 持久 Worker，比较新建与复用、同域与分域，并测量热状态占用的内存。固定请求中，复用确实减少了重复准备。
 
-We implemented Z → S → W without execing Python in descendants, repaired lifecycle and restricted fork runtime compatibility, admitted a fixed NumPy CPU recipe, then compared G0–G4. Additional experiments covered COW, initialization levels, concurrency, memory pressure and template switching. These experiments found real performance boundaries rather than one universally winning layout.
+但完整 Worker 会占内存，也可能保留旧业务状态。SAND 和 FaasCache 等又已研究相关组织与保留机制，于是我们继续问：能否只保留共享初始化状态，让 Worker 和域分别结束？
 
-Real-agent investigation followed within this direction: public trajectories, executor source review, private-VM replay/process observation, multi-session qualification and dependency diagnostics. Persisting a container was already common; many commands still created new processes, but legal heap-sharing coverage remained unproven. Ordinary caches also removed some repeated initialization.
+## 3. Zygote：跨域共享初始化状态
 
-Cross-domain Zygotes, dependency trees and warming/cache/routing had substantial overlap with SOCK/OpenLambda, Forklift, FaasCache and Archipelago. Single-spawn permission studies and protocol simplifications did not establish a distinct whole-system improvement under the original contract. A complete automatic joint scheduler was never built.
+这一步投入了最多实现。我们跑通不重新 exec Python 的 Z → S → W，修复取消、回收和受限 fork 运行时问题，为固定 NumPy CPU 配方建立准入，再完成 G0–G4 及 COW、并发、内存、模板切换对照。
 
-## 4. Transparent CLI: explore automatic admission
+结果显示，没有一种布局总是最好：每域请求少时跨域共享有价值；域内重复多时，本地模板可能更划算；允许明确状态恢复时，持久 Worker 还能省成本。
 
-Agent commands such as `python test.py` and `python -m pytest` motivated a lightweight classifier selecting native execution or a warm path without changing the command. We studied fresh-process semantics, mutable project code, callback authority, invalidation and side effects, and examined pyforkexec, pytest-fast, Zygo and Containerless.
+随后我们研究真实 Agent。持久容器已经解决了一部分环境重复问题，重复 Python 启动虽存在，但其中能合法共享 heap 的覆盖率尚未确证。普通缓存也能降低部分导入成本。
 
-No new transparent CLI classifier or execution system was implemented, and no corresponding performance result was obtained. Existing work covered many constituent mechanisms while preserving arbitrary CLI behavior remained expensive. The project lead paused new core implementation on these directions, retaining the prototypes, qualified results and negative evidence. This is a research allocation decision, not a proof that warming is impossible or an announcement of a new primary direction.
+与此同时，SOCK/OpenLambda、Forklift、FaasCache 和 Archipelago 已覆盖大量跨域派生、模板树、缓存与预热思路。我们探索过派生简化和联合组织，但还没有找到清晰的新增系统能力；完整自动调度器没有实现。
+
+## 4. 透明 CLI：自动寻找合法复用机会
+
+Agent 常直接执行 `python test.py`、`python -m pytest` 等命令。我们因而设想轻量分类器：不要求修改原命令，自动选择原生路径或预热执行。
+
+这一阶段完成了语义、安全、代码失效和副作用分析，并核查 pyforkexec、pytest-fast、Zygo、Containerless 等近邻工作。没有实现新的分类器或透明执行系统，也没有对应性能数据。
+
+保持普通 CLI 行为需要付出较大兼容成本，许多基础机制又已有直接先例。在没有找到足够明确的真实需求和新增能力前，负责人决定暂停这些方向的新增核心实现。
+
+## 留下了什么？
+
+我们保留了隔离原型、Worker 与跨域派生、固定运行时、资格方法、五架构对照，以及真实 Agent 与依赖诊断资料。暂停是阶段性的投入选择，不是对前期成果的否定，也不是技术不可能性证明。下一条研究主线仍需另行决定。

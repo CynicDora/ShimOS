@@ -1,11 +1,11 @@
-# Selected research archive
+# 研究资料导航
 
-This is an explicitly selected source/evidence snapshot, not the entire private research workspace. The final reports link to preserved source and identify omitted artifacts. Local links that cannot be satisfied in this distribution are rendered as omitted references instead of pretending raw logs are present.
+这里收录了精选的项目源码、实验驱动、最终报告和数值导出，完整实验工作区仍保留在原项目中。没有上传的日志、镜像和第三方数据，会在报告链接中注明省略。
 
-- [Prototype navigation](../prototypes/README.md).
-- [Experimental reading order](../docs/experiments.md).
-- [Research history](../docs/research-history.md).
-- [Per-file source/release identities](../docs/source-manifest.json).
-- [Distribution exclusions](../docs/release-scope.md).
+- 看实现：[原型导航](../prototypes/README.md)。
+- 看结果：[实验汇总与阅读顺序](../docs/experiments.md)。
+- 看过程：[研究历程](../docs/research-history.md)。
+- 核对来源：[原始/发布文件 SHA 清单](../docs/source-manifest.json)。
+- 了解删选与脱敏：[收录范围](../docs/release-scope.md)。
 
-The laboratory's root native execution MVP used unrelated G1/G2/G3 labels; that branch is not bundled. This repository's G0–G4 labels always refer to the Worker/Zygote architecture comparison.
+历史报告保留当时的结论和范围；后来的验证不自动覆盖旧版本。原实验室还有使用另一套 G1/G2/G3 编号的 native MVP，本仓库没有收录，避免与这里的 G0–G4 架构模式混淆。

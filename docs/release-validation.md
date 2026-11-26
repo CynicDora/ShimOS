@@ -1,19 +1,22 @@
-# Packaging validation
+# 发布整理时做过的检查
 
-This source release was checked without launching a new VM or performance campaign.
+这些检查针对仓库整理，没有启动新的 VM 或性能实验。
 
-- Source provenance: 557 imported files checked against their released SHA256 manifest; 515 remain byte-identical to the selected originals, 42 are sanitized snapshots (mostly reports/paths/omitted-artifact links).
-- Python source parsing and local Markdown link checks: PASS.
-- Offline result reproduction: PASS, including both headline table medians and sample counts.
-- Existing `test_workers.Oracles`: 8 pure protocol/reference tests PASS. Worker integration tests were not run on the host.
-- GCC `-fsyntax-only` on A+B `bridge_d.c` and `domain_init.c`: PASS. Syntax checks do not establish kernel, ABI or runtime correctness.
-- Figure generation: two descriptive plots from the included numeric exports, visually reviewed; no new measurements.
-- Exact VM asset preflight: BLOCKED as expected in this curated checkout. The fixture and vendor runtime payloads are intentionally absent.
-- Filesystem credential scan: gitleaks v8.30.1, redacted reporting, no leaks detected. Staged-file review also checked size, file type, private home paths, private service links, private-network addresses and forbidden artifact paths.
-- Imported historical whitespace, CSV line endings and patch context are preserved with `.gitattributes`; new documentation passes staged whitespace checking.
+| 检查内容 | 结果与范围 |
+|---|---|
+| 来源清单 | 557 个导入文件按发布 SHA256 核对；515 个与选取原件字节相同，42 个为脱敏副本，主要是报告与路径/链接 |
+| 源码与链接 | Python 解析、本地 Markdown 链接检查通过 |
+| 主要结果 | CSV 离线复算通过，含两张主要表格的中位数和样本数 |
+| 现有协议测试 | `test_workers.Oracles` 的 8 个纯协议/参考结果测试通过；未在宿主跑 Worker 集成实验 |
+| 关键 C 文件 | A+B `bridge_d.c`、`domain_init.c` 的 GCC 语法检查通过，不等于 ABI 或运行时资格 |
+| 图表 | 从收录数据生成并检查两张图，没有新增测量 |
+| VM 前提 | 缺少未分发资产，按预期返回 BLOCKED |
+| 凭证与文件 | gitleaks v8.30.1 脱敏扫描未发现泄漏；另检查暂存文件大小、类型、私人路径、文档链接、内部地址和禁入产物 |
 
-The original working tree has no Git history. This release initializes its own repository, uses a GitHub noreply author identity, and contains no inherited private commits. Before pushing, the committed history is scanned separately with gitleaks. Detailed machine-local packaging receipts are not included because they can contain host paths. This report describes packaging checks, not renewed experimental qualification or a comprehensive security audit.
+原目录没有 Git 历史；发布仓库使用新历史和 GitHub noreply 作者身份。推送前另行扫描提交历史。机器本地检查收据可能含宿主路径，未随仓库上传。这些结果不代表完成了全面安全审计或重新验证所有实验。
 
-No blanket open-source license has been selected. The target publication mode is Private; permission to make it Public and to license first-party material remains with the owner.
+历史空白、CSV 换行和补丁上下文通过 `.gitattributes` 保留；新文档进行暂存区空白检查。首次 GitHub 检出曾发现一处打包遗漏：`runs/` 忽略规则漏掉了允许收录的运行时哈希清单。后续只补入该 JSON，并增加已跟踪文件检查，保留失败 CI，不加入原始运行日志。
 
-The first GitHub checkout exposed one packaging omission: a blanket `runs/` ignore excluded the reviewed candidate-runtime SHA metadata. A follow-up commit admits only that named JSON file, preserves the failed CI run, and adds a tracked-file check to prevent working-tree-only inputs from passing validation. No experimental results or raw runs were added/changed.
+当前中文调整仅涉及介绍与导航文档。原始实验源码、数据、来源清单和第三方许可文本保留；检查结果以各提交对应的 CI 为准。
+
+项目自身仍未选择统一开源许可证，仓库保持 Private。公开发布和许可选择由作者决定。
